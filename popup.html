@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>GLaDOS 自动签到</title>
+  <style>
+    /* 弹窗尺寸放大一点，避免内容被挤压 */
+    body {
+      width: 320px;
+      margin: 0;
+      padding: 14px;
+      font: 13px/1.6 -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: #222;
+      background: #fff;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+    label.row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    label.row span {
+      color: #444;
+    }
+    input[type="time"] {
+      width: 110px;
+      padding: 2px 4px;
+      font: inherit;
+    }
+    .actions {
+      display: flex;
+      gap: 8px;
+      margin: 12px 0 10px;
+    }
+    button {
+      flex: 1;
+      padding: 6px 0;
+      font: inherit;
+      border-radius: 6px;
+      border: 1px solid #d0d0d0;
+      background: #f7f7f7;
+      cursor: pointer;
+    }
+    button.primary {
+      border-color: #1a73e8;
+      background: #1a73e8;
+      color: #fff;
+    }
+    button:disabled {
+      opacity: 0.6;
+      cursor: default;
+    }
+    #status {
+      padding-top: 8px;
+      border-top: 1px solid #eee;
+      color: #555;
+      white-space: pre-line;
+    }
+    h2 {
+      margin: 12px 0 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #666;
+    }
+    /* 记录列表：定高滚动，避免弹窗被撑太高 */
+    #history {
+      max-height: 150px;
+      overflow-y: auto;
+      border: 1px solid #eee;
+      border-radius: 6px;
+      padding: 4px 6px;
+      font-size: 12px;
+      color: #666;
+    }
+    .rec + .rec {
+      margin-top: 4px;
+      padding-top: 4px;
+      border-top: 1px dashed #f0f0f0;
+    }
+    .rec-head {
+      font-weight: 600;
+    }
+    .rec.ok .rec-head {
+      color: #2e9e4f;
+    }
+    .rec.fail .rec-head {
+      color: #d93025;
+    }
+    .rec-msg {
+      color: #777;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+  <h1>GLaDOS 自动签到</h1>
+
+  <label class="row">
+    <span>启用每天定时签到</span>
+    <input type="checkbox" id="enabled" />
+  </label>
+
+  <label class="row">
+    <span>执行时间</span>
+    <input type="time" id="time" />
+  </label>
+
+  <label class="row">
+    <span>前台标签页打开（更稳）</span>
+    <input type="checkbox" id="foreground" title="勾选后到点会切到签到页；不勾选则在后台标签页里点击" />
+  </label>
+
+  <div class="actions">
+    <button id="run" class="primary">立即签到</button>
+    <button id="save">保存设置</button>
+  </div>
+
+  <div id="status">加载中…</div>
+
+  <h2>签到记录（最近 20 条）</h2>
+  <div id="history">加载中…</div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

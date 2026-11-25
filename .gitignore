@@ -1,0 +1,5 @@
+.DS_Store
+*.log
+
+# 源图等与本扩展无关的大文件
+glados-checkin-icon-v3.jpg
